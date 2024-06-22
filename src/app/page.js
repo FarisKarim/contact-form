@@ -20,22 +20,11 @@ export default function Home() {
     consent: false,
   });
 
-  // const handleCheckboxChange = (e) => {
-  //   const { checked } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     consent: checked
-  //   });
-  //   setErrors({
-  //     ...errors,
-  //     consent: !checked
-  //   });
-  // };
-
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
     setFormData({
       ...formData,
+      // Dynamically updating uses brackets... because id is a variable with the actual property name.
       [id]: type === 'checkbox' ? checked : value
     });
     setErrors({
@@ -47,6 +36,7 @@ export default function Home() {
   const handleQuery = (selection) => {
     setFormData({
       ...formData,
+      // queryType is not a variable, it is literally a known key of formData... so no brackets are needed.
       queryType: selection,
     });
   };
@@ -101,15 +91,15 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center pt-4 pb-4 xs:pt-0 xs:pb-0 xs:h-screen">
         <form
           onSubmit={handleSubmit}
-          className="mt-[20vh] mb-[20vh] w-full max-w-lg bg-white shadow-md rounded-lg pt-6 px-8 pb-8"
+          className="sm:mt-[5vh] lg:mt-[10vh] lg:[mb-10vh] sm:mb-[5vh] w-[90vw] sm:w-full max-w-lg bg-white shadow-md rounded-xl pt-6 px-5 pb-4 sm:pt-6 sm:px-8 sm:pb-8"
         >
           <span className="text-2xl">Contact Us</span>
 
-          <div className="flex mt-5 h-15 justify-between gap-2">
-            <div className="flex flex-col w-1/2">
+          <div className="flex flex-col sm:flex-row mt-5 h-15 justify-between gap-2">
+            <div className="flex flex-col w-full sm:w-1/2">
               <label
                 className="text-gray-500 text-xs font-semibold mb-1"
                 htmlFor="username"
@@ -117,8 +107,8 @@ export default function Home() {
                 First Name *
               </label>
               <input
-                className={`border rounded-lg text-sm py-2 px-3 mb-2 text-gray-700 ${
-                  errors.firstName ? "border-red-500" : "border-gray-300"
+                className={`border hover:border-green-600 rounded-lg text-sm py-2 px-3 mb-2 text-gray-600 ${
+                  errors.firstName ? "border-red-500" : "border-gray-400"
                 }`}
                 id="firstName"
                 type="text"
@@ -131,7 +121,7 @@ export default function Home() {
                 )}
               </div>
             </div>
-            <div className="flex flex-col w-1/2">
+            <div className="flex flex-col w-full sm:w-1/2">
               <label
                 className="text-gray-500 text-xs font-semibold mb-1"
                 htmlFor="username"
@@ -139,8 +129,8 @@ export default function Home() {
                 Last Name *
               </label>
               <input
-                className={`border rounded-lg text-sm py-2 mb-2 px-3 text-gray-700 ${
-                  errors.lastName ? "border-red-500" : "border-gray-300"
+                className={`border rounded-lg hover:border-green-600 text-sm py-2 mb-2 px-3 text-gray-600 ${
+                  errors.lastName ? "border-red-500" : "border-gray-400"
                 }`}
                 id="lastName"
                 type="text"
@@ -162,8 +152,8 @@ export default function Home() {
               Email Address *
             </label>
             <input
-              className={`border rounded-lg text-sm py-2 mb-2 px-3 text-gray-700 ${
-                errors.email ? "border-red-500" : "border-gray-300"
+              className={`border rounded-lg hover:border-green-600 text-sm py-2 mb-2 px-3 text-gray-600 ${
+                errors.email ? "border-red-500" : "border-gray-400"
               }`}
               id="email"
               type="text"
@@ -185,38 +175,38 @@ export default function Home() {
             >
               Query Type *
             </label>
-            <div className="flex gap-2 h-11 mb-2">
+            <div className="flex flex-col sm:flex-row gap-2 h-11 mb-2">
               <div
-                className={`border w-1/2 flex items-center gap-2 border-gray-300 rounded-lg px-5 hover:border-green-700 text-gray-700 ${
+                className={`border w-full sm:w-1/2 flex items-center gap-2 border-gray-400 rounded-lg px-5 py-2 sm:py-0 hover:border-green-600 text-gray-600 ${
                   formData.queryType === "General Enquiry"
-                    ? "bg-green-100 border border-green-700"
-                    : "border border-gray-300"
+                    ? "bg-green-100 border border-green-600"
+                    : "border border-gray-400"
                 }`}
                 onClick={() => handleQuery("General Enquiry")}
               >
                 <div
                   className={`w-4 h-4 rounded-full ${
                     formData.queryType === "General Enquiry"
-                      ? "bg-green-500 border border-green-700"
-                      : "border border-gray-300"
+                      ? "bg-green-600 border border-green-600"
+                      : "border border-gray-400"
                   }`}
                 />
                 <div className="text-sm text-gray-600">General Enquiry</div>
               </div>
 
               <div
-                className={`border w-1/2 flex items-center gap-2 border-gray-300 rounded-lg px-5 hover:border-green-700 text-gray-700 ${
+                className={`border w-full sm:w-1/2 flex items-center gap-2 border-gray-400 rounded-lg px-5 py-2 sm:py-0 hover:border-green-600 text-gray-600 ${
                   formData.queryType === "Support Request"
-                    ? "bg-green-100 border border-green-700"
-                    : "border border-gray-300"
+                    ? "bg-green-100 border border-green-600"
+                    : "border border-gray-400"
                 }`}
                 onClick={() => handleQuery("Support Request")}
               >
                 <div
                   className={`w-4 h-4 rounded-full ${
                     formData.queryType === "Support Request"
-                      ? "bg-green-500 border border-green-700"
-                      : "border border-gray-300"
+                      ? "bg-green-600 border border-green-600"
+                      : "border border-gray-400"
                   }`}
                 />
                 <div className="text-sm text-gray-600">Support Request</div>
@@ -232,13 +222,13 @@ export default function Home() {
           </div>
           <div className="flex flex-col w-full mt-5">
             <label
-              className="text-gray-500 text-xs font-semibold mb-1"
+              className="text-gray-500 mt-6 xs:mt-0 text-xs font-semibold mb-1"
               htmlFor="username"
             >
               Message *
             </label>
             <input
-              className={`border mb-2 text-xs text-wrap overflow-auto border-gray-300 rounded-lg py-2 px-3 h-[10vh] text-gray-700 ${
+              className={`border hover:border-green-600 mb-2 text-xs text-wrap overflow-auto border-gray-400 rounded-lg py-2 px-3 h-[20vh] sm:h-[10vh] text-gray-600 ${
                 errors.message ? "border-red-500" : ""
               }`}
               id="message"
@@ -254,7 +244,7 @@ export default function Home() {
           </div>
           <div className="flex mb-2 mt-5">
             <input id="consent" value={formData.consent} onChange={handleChange} className="accent-green-600" type="checkbox" />
-            <span className="text-sm sm:ml-4 text-gray-500">
+            <span className="text-sm ml-4 text-gray-500">
               I consent to being contacted by the team *
             </span>
           </div>
@@ -266,7 +256,7 @@ export default function Home() {
 
           <button
             type="submit"
-            className="w-full mt-8 border h-11 rounded-lg bg-green-700 text-white "
+            className="w-full mt-8 border h-11 rounded-lg bg-green-600 text-white "
           >
             Submit
           </button>
